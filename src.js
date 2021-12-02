@@ -1,4 +1,4 @@
-module.exports.calcularPorcentajes = (limiteCO, limiteCO2, limiteHC, limiteO2,
+const calcularPocentajes = (limiteCO, limiteCO2, limiteHC, limiteO2,
     valorCO, valorCO2, valorHC, valorO2) => {
 
     let porcentajeCO = limiteCO ? valorCO * 100 / limiteCO : 0;
@@ -7,14 +7,16 @@ module.exports.calcularPorcentajes = (limiteCO, limiteCO2, limiteHC, limiteO2,
     let porcentajeO2 = limiteO2 ? valorO2 * 100 / limiteO2 : 0;
 
     return {
-        "porcentajeCO ": porcentajeCO + "%",
-        "porcentajeCO2": porcentajeCO2 + "%",
-        "porcentajeHC ": porcentajeHC + "%",
-        "porcentajeO2 ": porcentajeO2 + "%"
+        porcentajeCO,
+        porcentajeCO2,
+        porcentajeHC,
+        porcentajeO2
     }
 }
 
-module.exports.registarCO = (value) => {
+module.exports.calcularPocentajes = calcularPocentajes;
+
+const registrarCO = (value) => {
     if(value >= global.rangosCO[0].de && value <= global.rangosCO[0].hasta){
         return global.rangosCO[0].etiqueta;
     } else if(value >= global.rangosCO[1].de && value <= global.rangosCO[1].hasta){
@@ -24,34 +26,44 @@ module.exports.registarCO = (value) => {
     }
 }
 
-module.exports.registrarCO = registarCO;
+module.exports.registrarCO = registrarCO;
 
-const registarCO2 = (value) => {
-
-    //if registrarCO > 0 , < 10 
-
+const registrarCO2 = (value) => {
+    if(value >= global.rangosCO2[0].de && value <= global.rangosCO2[0].hasta){
+        return global.rangosCO2[0].etiqueta;
+    } else if(value >= global.rangosCO2[1].de && value <= global.rangosCO2[1].hasta){
+        return global.rangosCO2[1].etiqueta;
+    } else{
+        return "fuera_de_rango";
+    }
 }
 
 module.exports.registrarCO2 = registrarCO2;
-module.exports.calcularPorcentajes = calcularPorcentajes;
-
-const registarHC = (value) => {
 
 
-
+const registrarHC  = (value) => {
+    if(value >= global.rangosHC[0].de && value <= global.rangosHC[0].hasta){
+        return global.rangosHC[0].etiqueta;
+    } else if(value >= global.rangosHC[1].de && value <= global.rangosHC[1].hasta){
+        return global.rangosHC[1].etiqueta;
+    } else{
+        return "fuera_de_rango";
+    }
 }
 
 module.exports.registrarHC = registrarHC;
-module.exports.calcularPorcentajes = calcularPorcentajes;
 
-const registarO2 = (value) => {
-
-
-
+const registrarO2= (value) => {
+    if(value >= global.rangosO2[0].de && value <= global.rangosO2[0].hasta){
+        return global.rangosO2[0].etiqueta;
+    } else if(value >= global.rangosO2[1].de && value <= global.rangosO2[1].hasta){
+        return global.rangosO2[1].etiqueta;
+    } else{
+        return "fuera_de_rango";
+    }
 }
 
 module.exports.registrarO2 = registrarO2;
-module.exports.calcularPorcentajes = calcularPorcentajes;
 
 
 global.rangosCO = [
